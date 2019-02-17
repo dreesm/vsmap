@@ -12,18 +12,18 @@ def get_db():
             authdb = 'vsmap'
         dbsite = '127.0.0.1:27017'
         dbauthmechanism = 'SCRAM-SHA-256'
-        url = 'mongodb://%s:%s@%s/authSource=%s&authMechanism=%s' % (urllib.parse.quote_plus(usr), urllib.parse.quote_plus(pwd), dbsite, authdb, dbauthmechanism)
-        client = Mongoclient(url)
+        url = 'mongodb://%s:%s@%s/%s' % (urllib.parse.quote_plus(usr), urllib.parse.quote_plus(pwd), dbsite, authdb)
+        client = MongoClient(url)
         g.client = client
         g.db = g.client.vsmap
     
     return g.client
 
-def close_db():
+def close_db(e=None):
     client = g.pop('client', None)
 
     if client is not None:
-        db = g.db.pop('db', None)
+        db = g.pop('db', None)
         client.close()
 
 def init_app(app):

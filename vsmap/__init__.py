@@ -8,7 +8,7 @@ def create_app():
     @app.route('/')
     def index():
         cursor = db.get_db()
-        exist  = cursor.workcenter.find_one()
+        exist  = cursor.vsmap.workcenter.find_one()
         if exist is None:
             return 'No data in db'
         else:
