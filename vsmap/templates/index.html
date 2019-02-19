@@ -1,0 +1,19 @@
+{% extends 'base.html' %}
+
+{% block header %}
+  <h1>{% block title %}Select Value Stream{% endblock %}</h1>
+{% endblock %}
+
+{% block content %}
+  <select style="min-width:120px;">
+      {% for stream in streams %}
+        <option value=stream>stream</option>
+      {% endfor %}
+  </select>
+  <p>Create A New Value Stream</p>
+  <form method="post"">
+      <label for="vsname">Value Stream Name</label>
+      <input name="vsname" id="vsname" required>
+      <input type="submit" value="Create">
+  </form>
+{% endblock %}

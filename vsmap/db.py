@@ -12,8 +12,8 @@ def get_db():
             authdb = 'vsmap'
         dbsite = '127.0.0.1:27017'
         dbauthmechanism = 'SCRAM-SHA-256'
-        url = 'mongodb://%s:%s@%s/%s' % (urllib.parse.quote_plus(usr), urllib.parse.quote_plus(pwd), dbsite, authdb)
-        client = MongoClient(url)
+        uri = 'mongodb://%s:%s@%s/%s' % (urllib.parse.quote_plus(usr), urllib.parse.quote_plus(pwd), dbsite, authdb)
+        client = MongoClient(uri)
         g.client = client
         g.db = g.client.vsmap
     

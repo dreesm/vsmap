@@ -1,4 +1,4 @@
-from flask import Flask
+from flask import Flask, render_template
 from . import db
 
 def create_app():
@@ -8,14 +8,20 @@ def create_app():
     @app.route('/')
     def index():
         cursor = db.get_db()
-        exist  = cursor.vsmap.workcenter.find_one()
-        if exist is None:
-            return 'No data in db'
-        else:
-            return 'data in db'
+        streams = []
+        for doc in cursor.vsmap.valuestreams.find():
+            streams.append = doc['name']
+        
+        if request.method == 'POST':
+            vsname = request.form['vsname']
+            if not vsname:
+                error = 'Value stream name is required'
+
+
+        return render_template('index.html', streams=streams)
 
     @app.route('/hello')
     def hello():
-        return 'Hello, World'
+        return 'Hello, World!'
 
     return app
