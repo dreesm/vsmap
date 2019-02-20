@@ -4,6 +4,12 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>{% block title %}{% endblock %} - Value Stream Mapping</title>
     <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+    <nav>
+        <ul>
+            <li><span>Username</span></li>
+            <li><a href="{{ url_for('index') }}">index</a></li>
+        </ul>
+    </nav>
     <section class="content">
         <header>
             {% block header %}{% endblock %}

@@ -27,13 +27,15 @@ def create_app():
         
         if request.method == 'POST':
             vsname = request.form['vsname']
+            new = request.form['new']
             if not vsname:
                 error = 'Value stream name is required'
-            elif vsname in streams:
+            elif new and vsname in streams:
                 error = 'Value stream name is already taken'
             
             if error is None:
-                cursor.vsmap.valuestreams.insert_one({'vsname': vsname})
+                if new:
+                    cursor.vsmap.valuestreams.insert_one({'vsname': vsname})
                 return redirect(url_for('streams.overview'))
             
             flash(error)
