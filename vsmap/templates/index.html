@@ -5,15 +5,19 @@
 {% endblock %}
 
 {% block content %}
-  <select style="min-width:120px;">
-      {% for stream in streams %}
-        <option value=stream>stream</option>
-      {% endfor %}
-  </select>
-  <p>Create A New Value Stream</p>
-  <form method="post"">
-      <label for="vsname">Value Stream Name</label>
-      <input name="vsname" id="vsname" required>
-      <input type="submit" value="Create">
-  </form>
+    <form method="post">
+        <select name="vsname" style="min-width:120px;">
+            {% for stream in streams %}
+              <option value={{stream}}>{{ stream }}</option>
+            {% endfor %}
+        </select>
+        <input type="submit" value="test">
+    </form>
+    <hr>
+    <h2>Create A New Value Stream</h2>
+    <form method="post">
+        <label for="vsname">Value Stream Name</label>
+        <input name="vsname" id="vsname" required>
+        <input type="submit" value="Create">
+    </form>
 {% endblock %}
