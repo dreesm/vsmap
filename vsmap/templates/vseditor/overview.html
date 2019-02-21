@@ -1,5 +1,18 @@
 {% extends 'base.html' %}
 
 {% block header %}
-  <h1>{% block title %}Overview{% endblock %}</h1>
+  <h1>{% block title %}Overview of {{ stream }} Value Stream{% endblock %}</h1>
+{% endblock %}
+
+{% block content %}
+  Parts in {{ stream }} value stream:
+  {% for part in partlist %}
+    <br>
+    {{ part }}
+  {% endfor %}
+  <form method="post">
+    <label for="newpart">Add part to value stream:</label>
+    <input name="newpart" id="newpart" required>
+    <input type="submit" value="Add New Part">
+  </form>
 {% endblock %}

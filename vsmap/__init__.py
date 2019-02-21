@@ -36,7 +36,7 @@ def create_app():
             if error is None:
                 if new:
                     cursor.vsmap.valuestreams.insert_one({'vsname': vsname})
-                return redirect(url_for('streams.overview'))
+                return redirect(url_for('streams.overview', stream=vsname))
             
             flash(error)
 
