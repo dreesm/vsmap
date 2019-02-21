@@ -6,13 +6,14 @@
 
 {% block content %}
     <form method="post">
-        <select name="vsname" style="min-width:120px;">
+        <label for="vsname">Value Stream Name</label>
+        <select name="vsname">
             {% for stream in streams %}
               <option value={{stream}}>{{ stream }}</option>
             {% endfor %}
         </select>
         <input type="hidden" name="new" value="">
-        <input type="submit" value="test">
+        <input type="submit" value="Overview">
     </form>
     <hr>
     <h2>Create A New Value Stream</h2>

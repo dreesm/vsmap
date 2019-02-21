@@ -6,9 +6,14 @@
 
 {% block content %}
   Parts in {{ stream }} value stream:
+  <hr style="visibility:hidden;">
   {% for part in partlist %}
-    <br>
-    {{ part }}
+    <form method="post">
+        <label for="part" style="width:30%;display:inline-block">{{ part }}</label>
+        <input type="hidden" name="newpart" value="">
+        <input type="submit" value="Edit Part">
+        <input type="submit" value="Remove Part">
+    </form>
   {% endfor %}
   <form method="post">
     <label for="newpart">Add part to value stream:</label>

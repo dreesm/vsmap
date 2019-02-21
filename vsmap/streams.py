@@ -1,5 +1,5 @@
 from flask import (
-    Blueprint, render_template, request, redirect, url_for
+    Blueprint, render_template, request, redirect, url_for, flash
 )
 from . import db
 
@@ -18,11 +18,18 @@ def overview(stream):
 
     if request.method == 'POST':
         newpart = request.form['newpart']
+        if not newpart:
+            error = "part name is required"
+        
         if 'parts' in streamdict:
             streamdict['parts'][newpart] = {'name': newpart}
         else:
             streamdict['parts'] = {newpart: {'name': newpart}}
-        cursor.vsmap.valuestreams.replace_one({'_id':streamdict['_id']}, streamdict)
-        return redirect(url_for('streams.overview', stream=stream))
+        
+        flash(error)
+
+        if error is None:
+            cursor.vsmap.valuestreams.replace_one({'_id':streamdict['_id']}, streamdict)
+            return redirect(url_for('streams.overview', stream=stream))
 
     return render_template('vseditor/overview.html', stream=stream, partlist=partlist)
