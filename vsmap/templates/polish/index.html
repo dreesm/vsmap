@@ -1,0 +1,29 @@
+{% extends 'base.html' %}
+
+{% block header %}
+  <h1>{% block title %}Electronic Polisher Traveler{% endblock %}</h1>
+  <hr>
+{% endblock %}
+
+{% block content %}
+    <h2>Work Order Lookup</h2>
+    <form method="post">
+        <label for="WONUM" style="width:30%;display:inline-block">Select WO</label>
+        <select name="WONUM">
+            {% for WONUM in workOrders %}
+              <option value={{WONUM}}>{{ WONUM }}</option>
+            {% endfor %}
+        </select>
+        <input type="hidden" name="new" value="">
+        <input type="hidden" name="form" value="1">
+        <input type="submit" value="Overview">
+    </form>
+    <form method="post">
+        <label for="WONUM" style="width:30%;display:inline-block">Start New WO</label>
+        <input name="WONUM" style="width:30%" id="WONUM" required>
+        <input type="hidden" name="new" value="True">
+        <input type="hidden" name="form" value="1">
+        <input type="submit" value="Create">
+    </form>
+    <h2>Machine Lookup</h2>
+{% endblock %}

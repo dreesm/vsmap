@@ -11,9 +11,11 @@ def create_app():
     from . import db
     from . import streams
     from . import parts
+    from . import polishtraveler
     db.init_app(app)
     app.register_blueprint(streams.bp)
     app.register_blueprint(parts.bp)
+    app.register_blueprint(polishtraveler.bp)
 
     @app.route('/', methods=('GET', 'POST'))
     def index():

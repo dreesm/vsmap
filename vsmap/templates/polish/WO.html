@@ -1,0 +1,34 @@
+{% extends 'base.html' %}
+
+{% block header %}
+  <h1>{% block title %}Overview of {{ WO }}{% endblock %}</h1>
+{% endblock %}
+
+{% block content %}
+  <h2>
+    {{ WO }} Polish Types: 
+    {% for type in types %}
+      {{ type }}
+    {% endfor %}
+  </h2>
+  <hr style="visibility:hidden;">
+  {% for side in sides %}
+    <form method="post">
+        <label for="part" style="width:30%;display:inline-block">{{ side }} polish data:</label>
+        <input type="hidden" name="form" value="1">
+        <input type="hidden" name="side" value="{{ side }}">
+        <input type="submit" name="edit" value="Edit">
+    </form>
+  {% endfor %}
+  <form method="post">
+    <label for="side">Add side to polish:</label>
+    <input type="hidden" name="form" value="1">
+    <input name="side" id="side" required>
+    <input type="submit" value="Add New side">
+  </form>
+  <hr>
+  <form method="POST">
+      <input type='submit' name='delete' value='Delete {{ WO }} Electronic Polish Traveler'>
+      <input type='hidden' name='form' value="3">
+  </form>
+{% endblock %}
