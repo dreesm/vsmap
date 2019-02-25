@@ -1,26 +1,47 @@
 {% extends 'base.html' %}
 
 {% block header %}
-  <h1>{% block title %}Select Value Stream{% endblock %}</h1>
+  <h1>{% block title %}Index Page{% endblock %}</h1>
+  <hr>
 {% endblock %}
 
 {% block content %}
+    <h2>Value Streams</h2>
     <form method="post">
-        <label for="vsname">Value Stream Name</label>
+        <label for="vsname" style="width:30%;display:inline-block">Select Value Stream</label>
         <select name="vsname">
             {% for stream in streams %}
               <option value={{stream}}>{{ stream }}</option>
             {% endfor %}
         </select>
         <input type="hidden" name="new" value="">
+        <input type="hidden" name="form" value="1">
         <input type="submit" value="Overview">
     </form>
-    <hr>
-    <h2>Create A New Value Stream</h2>
     <form method="post">
-        <label for="vsname">Value Stream Name</label>
-        <input name="vsname" id="vsname" required>
+        <label for="vsname" style="width:30%;display:inline-block">Create Value Stream</label>
+        <input name="vsname" style="width:30%" id="vsname" required>
         <input type="hidden" name="new" value="True">
+        <input type="hidden" name="form" value="1"">
         <input type="submit" value="Create">
     </form>
+    <h2>Parts</h2>
+    <form method="post">
+            <label for="partname" style="width:30%;display:inline-block">Select Part</label>
+            <select name="partname">
+                {% for part in parts %}
+                  <option value={{part}}>{{ part }}</option>
+                {% endfor %}
+            </select>
+            <input type="hidden" name="new" value="">
+            <input type="hidden" name="form" value="2">
+            <input type="submit" value="Overview">
+        </form>
+        <form method="post">
+            <label for="partname" style="width:30%;display:inline-block">Create Part</label>
+            <input name="partname" style="width:30%" id="partname" required>
+            <input type="hidden" name="new" value="True">
+            <input type="hidden" name="form" value="2">
+            <input type="submit" value="Create">
+        </form>
 {% endblock %}

@@ -10,14 +10,25 @@
   {% for part in partlist %}
     <form method="post">
         <label for="part" style="width:30%;display:inline-block">{{ part }}</label>
-        <input type="hidden" name="newpart" value="">
-        <input type="submit" value="Edit Part">
-        <input type="submit" value="Remove Part">
+        <input type="hidden" name="form" value="1">
+        <input type="hidden" name="part" value="{{part}}">
+        <input type="submit" name="change" value="Edit">
+        <input type="submit" name="change" value="Remove">
     </form>
+  {% endfor %}
+  {% for part in nopartlist %}
+    {{ part }}
+    <hr style="visibility:hidden;">
   {% endfor %}
   <form method="post">
     <label for="newpart">Add part to value stream:</label>
+    <input type="hidden" name="form" value="2">
     <input name="newpart" id="newpart" required>
     <input type="submit" value="Add New Part">
+  </form>
+  <hr>
+  <form method="POST">
+      <input type='submit' name='delete' value='Delete {{ stream }} Value Stream'>
+      <input type='hidden' name='form' value="3">
   </form>
 {% endblock %}
