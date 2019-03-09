@@ -1,7 +1,8 @@
 from flask import (
-    Blueprint, render_template, request, redirect, url_for, flash
+    Blueprint, render_template, request, redirect, url_for, flash, session
 )
 from . import db
+import json
 
 bp = Blueprint('streams', __name__, url_prefix='/valuestreams')
 
@@ -30,7 +31,8 @@ def overview(stream):
             elif partchange == 'Edit':
                 if 'partid' in streamdict['parts'][part]:
                     # need to figure out how to pass id
-                    # partid = streamdict['parts'][part]['partid']
+                    partid = streamdict['parts'][part]['partid']
+                    session['partid'] = json.dumps(partid, cls=db.Encoder)[1:-1]
                     return redirect(url_for('parts.overview', part=part))
                 else:
                     cursor.vsmap.parts.insert_one({'partname': part})
@@ -38,7 +40,7 @@ def overview(stream):
                     streamdict['parts'][part]['partid'] = partid
                     cursor.vsmap.valuestreams.replace_one({'_id':streamdict['_id']}, streamdict)
                     # need to figure out how to pass id
-                    # partid = partid
+                    session['partid'] = json.dumps(partid, cls=db.Encoder)[1:-1]
                     return redirect(url_for('parts.overview', part=part))
 
         elif formnum == "2":

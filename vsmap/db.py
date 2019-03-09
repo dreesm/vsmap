@@ -1,6 +1,15 @@
 from flask import g
 from pymongo import MongoClient
 import urllib
+import json
+from bson.objectid import ObjectId
+
+class Encoder(json.JSONEncoder):
+    def default(self, obj):
+        if isinstance(obj, ObjectId):
+            return str(obj)
+        else:
+            return obj
 
 def get_db():
     if 'db' not in g:
